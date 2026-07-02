@@ -208,9 +208,17 @@ document.addEventListener('click', function(e) {
     text.includes('신청하기') ||
     text.includes('지금 신청하기')
   ) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
     if (typeof fbq === 'function') {
       fbq('track', 'Lead');
     }
+
+    setTimeout(function() {
+      window.location.href = 'https://tally.so/r/RGgJpK';
+    }, 700);
   }
 }, true);
 </script>
