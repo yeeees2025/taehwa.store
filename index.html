@@ -198,13 +198,23 @@ document.addEventListener('DOMContentLoaded', async function() {
   </script>
 <script>
 document.addEventListener('click', function(e) {
-  const link = e.target.closest('a');
+  const link = e.target.closest && e.target.closest('a[href]');
   if (!link) return;
 
-  if (link.href && link.href.includes('tally.so')) {
-    fbq('track', 'Lead');
+  const href = link.href || '';
+
+  if (href.includes('tally.so')) {
+    e.preventDefault();
+
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+    }
+
+    setTimeout(function() {
+      window.location.href = href;
+    }, 300);
   }
-});
+}, true);
 </script>
 </body>
 </html>
