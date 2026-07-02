@@ -198,21 +198,19 @@ document.addEventListener('DOMContentLoaded', async function() {
   </script>
 <script>
 document.addEventListener('click', function(e) {
-  const link = e.target.closest && e.target.closest('a[href]');
-  if (!link) return;
+  const el = e.target.closest('div');
+  if (!el) return;
 
-  const href = link.href || '';
+  const text = (el.innerText || '').trim();
 
-  if (href.includes('tally.so')) {
-    e.preventDefault();
-
+  if (
+    text.includes('창업캠프 지원하기') ||
+    text.includes('신청하기') ||
+    text.includes('지금 신청하기')
+  ) {
     if (typeof fbq === 'function') {
       fbq('track', 'Lead');
     }
-
-    setTimeout(function() {
-      window.location.href = href;
-    }, 300);
   }
 }, true);
 </script>
